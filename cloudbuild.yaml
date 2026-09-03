@@ -8,5 +8,15 @@ steps:
       - '-t'
       - 'africa-south1-docker.pkg.dev/payroll-system-507408/cloud-run-source-deploy/payroll-service:latest'
       - '.'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - payroll-service
+      - '--image=africa-south1-docker.pkg.dev/payroll-system-507408/cloud-run-source-deploy/payroll-service:latest'
+      - '--region=africa-south1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
 images:
   - 'africa-south1-docker.pkg.dev/payroll-system-507408/cloud-run-source-deploy/payroll-service:latest'
