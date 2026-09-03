@@ -1,0 +1,9 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - build
+      - '-t'
+      - 'africa-south1-docker.pkg.dev/payroll-system-507408/cloud-run-source-deploy/payroll-service:latest'
+      - '.'
+images:
+  - 'africa-south1-docker.pkg.dev/payroll-system-507408/cloud-run-source-deploy/payroll-service:latest'
