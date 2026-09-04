@@ -5,20 +5,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'replace-this-with-a-secret-key'
 DEBUG = True
-# Allow Cloud Run domain and trust it for CSRF
 ALLOWED_HOSTS = [
     "payroll-service-1078816020262-1078816020262.africa-south1.run.app",
+    "payroll-service-1078816020262.africa-south1.run.app",
     "localhost",
     "127.0.0.1",
-    "payroll-service-1078816020262.africa-south1.run.app",
 ]
 
-# For Django 4.0+ include the scheme
 CSRF_TRUSTED_ORIGINS = [
-    "https://payroll-service-1078816020262-1078816020262.africa-south1.run.app"
+    "https://payroll-service-1078816020262-1078816020262.africa-south1.run.app",
     "https://payroll-service-1078816020262.africa-south1.run.app",
 ]
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
