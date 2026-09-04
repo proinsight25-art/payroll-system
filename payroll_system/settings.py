@@ -39,11 +39,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'payroll_system.urls'
 WSGI_APPLICATION = 'payroll_system.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
 }
 
 # Templates configuration so Django finds templates/registration/login.html
@@ -73,3 +68,17 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+
+import os
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'payrolldb'),
+        'USER': os.environ.get('DB_USER', 'payroll_user'),
+        'PASSWORD': os.environ.get('DB_PASS', ''),
+        'HOST': os.environ.get('DB_HOST', '/cloudsql/{}'.format(os.environ.get('CLOUD_SQL_CONNECTION_NAME', ''))),
+        'PORT': os.environ.get('DB_PORT', ''),
+    }
+}
