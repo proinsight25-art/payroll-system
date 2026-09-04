@@ -72,6 +72,14 @@ STATIC_URL = '/static/'
 
 import os
 
+'.format(os.environ.get('CLOUD_SQL_CONNECTION_NAME', ''))),
+        'PORT': os.environ.get('DB_PORT', ''),
+    }
+}
+
+
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
