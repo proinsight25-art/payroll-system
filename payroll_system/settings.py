@@ -12,6 +12,7 @@ ALLOWED_HOSTS = [
     "payroll-service-1078816020262.africa-south1.run.app",
     "localhost",
     "127.0.0.1",
+    "payroll-service-n7gqakiylq-bq.a.run.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
