@@ -1,0 +1,26 @@
+name: Run Django migrations on deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Execute Cloud Run migrate job
+        run: |
+          gcloud run jobs execute migrate-job \
+            --region=${{ secrets.GCP_REGION }} \
+            --wait --format="yaml"
