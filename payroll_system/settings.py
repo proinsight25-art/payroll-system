@@ -3,8 +3,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'replace-this-with-a-secret-key'
-DEBUG = True
+# SECURITY
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'replace-this-with-a-secret-key')
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+
 ALLOWED_HOSTS = [
     "payroll-service-1078816020262-1078816020262.africa-south1.run.app",
     "payroll-service-1078816020262.africa-south1.run.app",
@@ -17,6 +19,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://payroll-service-1078816020262.africa-south1.run.app",
 ]
 
+# Applications and middleware
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # add your apps here
 ]
 
 MIDDLEWARE = [
@@ -39,13 +43,11 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'payroll_system.urls'
 WSGI_APPLICATION = 'payroll_system.wsgi.application'
 
-}
-
-# Templates configuration so Django finds templates/registration/login.html
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'templates' ],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -58,35 +60,45 @@ TEMPLATES = [
     },
 ]
 
-# Login redirects
+# Auth redirects
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Harare'
 USE_I18N = True
 USE_TZ = True
 
+# Static files
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Database configuration (reads from environment variables)
+# Prefer explicit DB_HOST; otherwise build from CLOUD_SQL_CONNECTION_NAME
+CLOUD_SQL_CONNECTION_NAME = os.environ.get('CLOUD_SQL_CONNECTION_NAME', '')
+DEFAULT_DB_HOST = os.environ.get('DB_HOST', f"/cloudsql/{CLOUD_SQL_CONNECTION_NAME}" if CLOUD_SQL_CONNECTION_NAME else '')
 
-import os
-
-'.format(os.environ.get('CLOUD_SQL_CONNECTION_NAME', ''))),
+DATABASES = {
+    'default': {
+        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.postgresql'),
+        'NAME': os.environ.get('DB_NAME', 'payrolldb'),
+        'USER': os.environ.get('DB_USER', 'payroll_user'),
+        'PASSWORD': os.environ.get('DB_PASS', ''),
+        'HOST': DEFAULT_DB_HOST,
         'PORT': os.environ.get('DB_PORT', ''),
     }
 }
 
-
-import os
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'payrolldb'),
-        'USER': os.environ.get('DB_USER', 'payroll_user'),
-        'PASSWORD': os.environ.get('DB_PASS', ''),
-        'HOST': os.environ.get('DB_HOST', '/cloudsql/{}'.format(os.environ.get('CLOUD_SQL_CONNECTION_NAME', ''))),
-        'PORT': os.environ.get('DB_PORT', ''),
-    }
+# Logging (basic default; adjust as needed)
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {'class': 'logging.StreamHandler'},
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
+    },
 }
