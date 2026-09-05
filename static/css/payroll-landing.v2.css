@@ -56,3 +56,25 @@ body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;margin:0;background:v
   z-index: 0;
 }
 .hero-copy, .hero-login { position: relative; z-index: 1; }
+/* Why ProInsight and contact styles */
+.why-proinsight { padding:36px 0; border-top:1px solid rgba(11,63,120,0.04); margin-top:28px; }
+.why-grid { display:grid; grid-template-columns: 1fr 320px; gap:28px; align-items:start; }
+.why-copy .why-list { margin:14px 0 18px 0; padding-left:18px; color:#334155; }
+.why-list li { margin:8px 0; line-height:1.45; }
+.why-cta { margin-top:8px; font-weight:600; color:#0b2f4a; }
+
+.contact-card { background:#fff; border-radius:12px; padding:18px; box-shadow:0 8px 24px rgba(2,6,23,0.06); border:1px solid rgba(11,63,120,0.04); }
+.contact-card h4 { margin:0 0 8px 0; color:#0b2f4a; }
+.contact-note { color:#6b7280; font-size:0.9rem; margin-bottom:12px; }
+.contact-row { display:flex; flex-direction:column; gap:12px; }
+.contact-item { display:flex; flex-direction:column; gap:6px; }
+.contact-label { font-weight:700; color:#0b3b5a; font-size:0.95rem; }
+.contact-link { display:inline-block; text-decoration:none; font-weight:600; }
+.contact-link.email { color:#0b63d6; }
+.contact-link.whatsapp { color:#128C7E; }
+.contact-link:hover { text-decoration:underline; }
+
+@media (max-width: 979px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .contact-card { max-width:100%; }
+}
