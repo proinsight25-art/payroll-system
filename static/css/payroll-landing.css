@@ -30,3 +30,29 @@ body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;margin:0;background:v
   .hero-grid{grid-template-columns:1fr}
   .nav{display:none}
 }
+/* Hero background and header logo */
+.hero {
+  padding: 36px 0;
+  background-image: url('/static/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  position: relative;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+}
+.brand .logo {
+  height: 44px;
+  width: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6,10,20,0.35), rgba(6,10,20,0.55));
+  z-index: 0;
+}
+.hero-copy, .hero-login { position: relative; z-index: 1; }
