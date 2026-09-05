@@ -85,14 +85,11 @@ DEFAULT_DB_HOST = os.environ.get('DB_HOST') or (f"/cloudsql/{CLOUD_SQL_CONNECTIO
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': os.environ.get('DB_NAME', 'payrolldb'),
-        'USER': os.environ.get('DB_USER', 'payroll_user'),
-        'PASSWORD': os.environ.get('DB_PASS', ''),
-        'HOST': DEFAULT_DB_HOST,
-        'PORT': os.environ.get('DB_PORT', ''),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Logging (basic default; adjust as needed)
 LOGGING = {
