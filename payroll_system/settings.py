@@ -108,3 +108,6 @@ LOGGING = {
 }
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Include top-level static/ directory so collectstatic finds repo assets
+STATICFILES_DIRS = [ BASE_DIR / 'static' ]
