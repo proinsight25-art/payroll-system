@@ -108,3 +108,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Include top-level static/ directory so collectstatic finds repo assets
 STATICFILES_DIRS = [ BASE_DIR / 'static' ]
+
+# TEMPORARY: avoid ManifestStaticFilesStorage until manifest is fixed
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
